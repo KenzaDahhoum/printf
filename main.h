@@ -7,5 +7,5 @@
 int _printf(const char *format, ...);
 int _putchar(char c);
 void _itoa(int num, char *str);
-
+int decimalToBinary(unsigned int n);
 #endif /* MAIN.H*/

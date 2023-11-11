@@ -60,6 +60,13 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == 'b')
+		{
+			unsigned int bi = va_arg(args, unsigned int);
+
+			counter += decimalToBinary(bi);
+			i++;
+		}
 		else
 		{
 			_putchar(format[i]);
