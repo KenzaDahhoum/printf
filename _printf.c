@@ -67,6 +67,37 @@ int _printf(const char *format, ...)
 			counter += decimalToBinary(bi);
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == 'u')
+		{
+			unsigned int u = va_arg(args, unsigned int);
+
+				unsigned_itoa(u, str);
+				for (j = 0; str[j] != '\0'; j++)
+				{
+					_putchar(str[j]);
+					counter++;
+				}
+				i++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'o')
+		{
+			unsigned int o = va_arg(args, unsigned int);
+
+			counter+= decimalToOctal(o);
+			i++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'x')
+		{
+			unsigned int x = va_arg(args, unsigned int);
+			counter+= decimalToHexadecimalx(x);
+			i++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'X')
+		{
+			unsigned int X = va_arg(args, unsigned int);
+                        counter+= decimalToHexadecimalX(X);
+                        i++;
+		}
 		else
 		{
 			_putchar(format[i]);
