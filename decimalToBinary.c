@@ -17,8 +17,7 @@ int decimalToBinary(unsigned int n)
     }
     for (j = i - 1; j >= 0; j--) {
         _putchar(binaryNum[j] + '0');
-	count++;
-    }
-
+ count++;
+      }
     return (count);
 }

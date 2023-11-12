@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <limits.h>
-
+#define BUFFER_SIZE 1024
 /**
  * _printf - Custom implementation of the printf function
  * @format: The format string containing the characters and specifiers
@@ -11,6 +11,23 @@
  *              It prints to the standard output.
  * Return: Number of characters printed (excluding the null byte)
  */
+char buffer[BUFFER_SIZE];
+    int buffer_index = 0;
+
+     void flush_buffer() {
+        for (int k = 0; k < buffer_index; k++) {
+            _putchar(buffer[k]);
+        }
+        buffer_index = 0;
+    }
+void add_to_buffer(char ch) {
+        if (buffer_index == BUFFER_SIZE) {
+            flush_buffer();
+        }
+        buffer[buffer_index++] = ch;
+        counter++;
+    }
+
 int _printf(const char *format, ...)
 {
 	int i, j;
@@ -28,8 +45,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			c = va_arg(args, int);
-			_putchar(c);
-			counter++;
+			 add_to_buffer(c);
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 's')
@@ -37,15 +53,13 @@ int _printf(const char *format, ...)
 			s = va_arg(args, char*);
 			for (j = 0; s[j] != '\0'; j++)
 			{
-				_putchar(s[j]);
-				counter++;
+				 add_to_buffer(s[j]);
 			}
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
-			_putchar('%');
-			counter++;
+			 add_to_buffer('%');
 			i++;
 		}
 		else if ((format[i] == '%' && format[i + 1] == 'd')
@@ -55,8 +69,7 @@ int _printf(const char *format, ...)
 			_itoa(di, str);
 			for (j = 0; str[j] != '\0'; j++)
 			{
-				_putchar(str[j]);
-				counter++;
+				 add_to_buffer(str[j]);
 			}
 			i++;
 		}
@@ -74,8 +87,7 @@ int _printf(const char *format, ...)
 				unsigned_itoa(u, str);
 				for (j = 0; str[j] != '\0'; j++)
 				{
-					_putchar(str[j]);
-					counter++;
+					 add_to_buffer(str[j]);
 				}
 				i++;
 		}
@@ -100,11 +112,10 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[i]);
-			counter++;
+			 add_to_buffer(format[i]);
 		}
 	}
-
+flush_buffer(); 
 	va_end(args);
 	return (counter);
 }
