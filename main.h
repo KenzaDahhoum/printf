@@ -12,4 +12,7 @@ void unsigned_itoa(unsigned int num, char *str);
 int decimalToOctal(unsigned int n);
 int decimalToHexadecimalx(unsigned int n);
 int decimalToHexadecimalX(unsigned int n);
+void charToHex(unsigned char c);
+
+
 #endif /* MAIN.H*/

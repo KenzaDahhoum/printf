@@ -41,6 +41,25 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == 'S')
+		{
+ 			   s = va_arg(args, char*);
+    			for (j = 0; s[j] != '\0'; j++) {
+       				 if ((s[j] > 0 && s[j] < 32) || s[j] >= 127)
+				 {
+          				  _putchar('\\');
+           				 _putchar('x');
+           				 charToHex(s[j]);
+        				 counter += 2;
+				 }
+				 else
+				 {
+           				 _putchar(s[j]);
+       				 }
+       				 counter++;
+    				}
+    				i++;
+		}	
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
 			_putchar('%');
