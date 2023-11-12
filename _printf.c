@@ -1,8 +1,7 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <limits.h>
-
+#include "main.h"
 /**
  * _printf - Custom implementation of the printf function
  * @format: The format string containing the characters and specifiers
@@ -11,7 +10,6 @@
  *              It prints to the standard output.
  * Return: Number of characters printed (excluding the null byte)
  */
-
 int _printf(const char *format, ...)
 {
 	int i, j;
@@ -29,7 +27,8 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			c = va_arg(args, int);
-			 _putchar(c);
+			_putchar(c);
+			counter++;
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 's')
@@ -37,13 +36,15 @@ int _printf(const char *format, ...)
 			s = va_arg(args, char*);
 			for (j = 0; s[j] != '\0'; j++)
 			{
-				 _putchar(s[j]);
+				_putchar(s[j]);
+				counter++;
 			}
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
-			 _putchar('%');
+			_putchar('%');
+			counter++;
 			i++;
 		}
 		else if ((format[i] == '%' && format[i + 1] == 'd')
@@ -53,7 +54,8 @@ int _printf(const char *format, ...)
 			_itoa(di, str);
 			for (j = 0; str[j] != '\0'; j++)
 			{
-				 _putchar(str[j]);
+				_putchar(str[j]);
+				counter++;
 			}
 			i++;
 		}
@@ -68,37 +70,40 @@ int _printf(const char *format, ...)
 		{
 			unsigned int u = va_arg(args, unsigned int);
 
-				unsigned_itoa(u, str);
-				for (j = 0; str[j] != '\0'; j++)
-				{
-					 _putchar(str[j]);
-				}
-				i++;
+			unsigned_itoa(u, str);
+			for (j = 0; str[j] != '\0'; j++)
+			{
+				_putchar(str[j]);
+				counter++;
+			}
+			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 'o')
 		{
 			unsigned int o = va_arg(args, unsigned int);
 
-			counter+= decimalToOctal(o);
+			counter += decimalToOctal(o);
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 'x')
 		{
 			unsigned int x = va_arg(args, unsigned int);
-			counter+= decimalToHexadecimalx(x);
+			counter += decimalToHexadecimalx(x);
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 'X')
 		{
 			unsigned int X = va_arg(args, unsigned int);
-                        counter+= decimalToHexadecimalX(X);
-                        i++;
+			counter += decimalToHexadecimalX(X);
+			i++;
 		}
 		else
 		{
-			 _putchar(format[i]);
+			_putchar(format[i]);
+			counter++;
 		}
 	}
+
 	va_end(args);
 	return (counter);
 }
