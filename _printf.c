@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <limits.h>
-#define BUFFER_SIZE 1024
+
 /**
  * _printf - Custom implementation of the printf function
  * @format: The format string containing the characters and specifiers
@@ -11,22 +11,6 @@
  *              It prints to the standard output.
  * Return: Number of characters printed (excluding the null byte)
  */
-char buffer[BUFFER_SIZE];
-    int buffer_index = 0;
-
-     void flush_buffer() {
-        for (int k = 0; k < buffer_index; k++) {
-            _putchar(buffer[k]);
-        }
-        buffer_index = 0;
-    }
-void add_to_buffer(char ch) {
-        if (buffer_index == BUFFER_SIZE) {
-            flush_buffer();
-        }
-        buffer[buffer_index++] = ch;
-        counter++;
-    }
 
 int _printf(const char *format, ...)
 {
@@ -45,7 +29,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			c = va_arg(args, int);
-			 add_to_buffer(c);
+			 _putchar(c);
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 's')
@@ -53,13 +37,13 @@ int _printf(const char *format, ...)
 			s = va_arg(args, char*);
 			for (j = 0; s[j] != '\0'; j++)
 			{
-				 add_to_buffer(s[j]);
+				 _putchar(s[j]);
 			}
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
-			 add_to_buffer('%');
+			 _putchar('%');
 			i++;
 		}
 		else if ((format[i] == '%' && format[i + 1] == 'd')
@@ -69,7 +53,7 @@ int _printf(const char *format, ...)
 			_itoa(di, str);
 			for (j = 0; str[j] != '\0'; j++)
 			{
-				 add_to_buffer(str[j]);
+				 _putchar(str[j]);
 			}
 			i++;
 		}
@@ -87,7 +71,7 @@ int _printf(const char *format, ...)
 				unsigned_itoa(u, str);
 				for (j = 0; str[j] != '\0'; j++)
 				{
-					 add_to_buffer(str[j]);
+					 _putchar(str[j]);
 				}
 				i++;
 		}
@@ -112,10 +96,9 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			 add_to_buffer(format[i]);
+			 _putchar(format[i]);
 		}
 	}
-flush_buffer(); 
 	va_end(args);
 	return (counter);
 }
