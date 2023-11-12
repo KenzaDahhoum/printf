@@ -116,6 +116,13 @@ int _printf(const char *format, ...)
 			counter += decimalToHexadecimalX(X);
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == 'p')
+		{
+			void *p = va_arg(args, *void);
+			print_adress(p);
+			counter =+ print_adress(p);
+			i++;
+		}
 		else
 		{
 			_putchar(format[i]);

@@ -14,5 +14,5 @@ int decimalToHexadecimalx(unsigned int n);
 int decimalToHexadecimalX(unsigned int n);
 void charToHex(unsigned char c);
 
-
+int print_address(void *ptr);
 #endif /* MAIN.H*/
