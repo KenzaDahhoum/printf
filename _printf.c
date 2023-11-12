@@ -118,9 +118,9 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%' && format[i + 1] == 'p')
 		{
-			void *p = va_arg(args, *void);
-			print_adress(p);
-			counter =+ print_adress(p);
+			void *p = va_arg(args, void*);
+			print_address(p);
+			counter =+ print_address(p);
 			i++;
 		}
 		else
