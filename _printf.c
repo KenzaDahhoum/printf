@@ -95,6 +95,27 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == 'o')
+                 {
+                         unsigned int o = va_arg(args, unsigned int);
+ 
+                         counter += decimalToOctal(o);
+                         i++;
+                 }
+		else if (format[i] == '%' && format[i + 1] == 'x')
+                 {
+                         unsigned int x = va_arg(args, unsigned int);
+
+                         counter += decimalToHexadecimalx(x);
+                         i++;
+		 }
+		else if (format[i] == '%' && format[i + 1] == 'X')
+                 {
+                         unsigned int X = va_arg(args, unsigned int);
+
+                         counter += decimalToHexadecimalX(X);
+                         i++;
+                 }
 		else if (format[i] == '%' && format[i + 1] == 'p')
 		{
 			void *p = va_arg(args, void *);
