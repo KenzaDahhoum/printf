@@ -66,7 +66,7 @@ int _printf(const char *format, ...)
 			counter++;
 			i++;
 		}
-		else if ((format[i] == '%' && format[i + 1] == 'd')
+		else if ((format[i] == '%' && format[i + 1] == 'd' )
 				|| (format[i] == '%' && format[i + 1] == 'i'))
 		{
 			di = va_arg(args, int);
@@ -78,36 +78,7 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
-		if ((format[i] == '%' && format[i + 1] == '+' && format[i + 2] == 'd') ||
-			(format[i] == '%' && format[i + 1] == '+' && format[i + 2] == 'i')) {
-			di = va_arg(args, int);
-			if (di >= 0) {
-				_putchar('+');
-				counter++;
-			}
-			_itoa(di, str);
-			for (j = 0; str[j] != '\0'; j++) {
-				_putchar(str[j]);
-				counter++;
-			}
-			i += 2;
-		}
-		else if ((format[i] == '%' && format[i + 1] == ' ' && format[i + 2] == 'd')
-				|| (format[i] == '%' && format[i + 1] == ' ' && format[i + 2] == 'i'))
-		{
-			int num = va_arg(args, int);
-			if (num >= 0 && format[i - 1] != '+') {
-				_putchar(' ');
-				counter++;
-			}
-			_itoa(di, str);
-			for (j = 0; str[j] != '\0'; j++)
-			{
-				_putchar(str[j]);
-				counter++;
-			}
-			i+= 2;
-		}
+		
 		else if (format[i] == '%' && format[i + 1] == 'b')
 		{
 			unsigned int bi = va_arg(args, unsigned int);
