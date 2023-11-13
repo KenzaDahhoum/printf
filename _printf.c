@@ -78,6 +78,36 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
+		if ((format[i] == '%' && format[i + 1] == '+' && format[i + 2] == 'd') ||
+    (format[i] == '%' && format[i + 1] == '+' && format[i + 2] == 'i')) {
+    di = va_arg(args, int);
+    if (di >= 0) {
+        _putchar('+');
+        counter++;
+    }
+    _itoa(di, str);
+    for (j = 0; str[j] != '\0'; j++) {
+        _putchar(str[j]);
+        counter++;
+    }
+    i += 2;
+}
+else if ((format[i] == '%' && format[i + 1] == ' ' && format[i + 2] == 'd')
+		|| (format[i] == '%' && format[i + 1] == ' ' && format[i + 2] == 'i'))
+{
+	int num = va_arg(args, int);
+    if (num >= 0 && format[i - 1] != '+') {
+        _putchar(' ');
+        counter++;
+    }
+     _itoa(di, str);
+     for (j = 0; str[j] != '\0'; j++)
+     {
+	     _putchar(str[j]);
+	     counter++;
+     }
+     i+= 2;
+}
 		else if (format[i] == '%' && format[i + 1] == 'b')
 		{
 			unsigned int bi = va_arg(args, unsigned int);
@@ -97,25 +127,37 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
-		else if (format[i] == '%' && format[i + 1] == 'o')
-		{
-			unsigned int o = va_arg(args, unsigned int);
+else if (format[i] == '%' && (format[i + 1] == 'o' || (format[i + 1] == '#' && format[i + 2] == 'o'))) {
+    unsigned int o = va_arg(args, unsigned int);
+    if (format[i + 1] == '#' && o != 0) {
+        _putchar('0');      
+        _putchar('o');
+        counter += 2;
+    }
+    counter += decimalToOctal(o);
+    i += (format[i + 1] == '#') ? 3 : 2; 
+}	
+else if (format[i] == '%' && (format[i + 1] == 'x' || (format[i + 1] == '#' && format[i + 2] == 'x'))) {
+    unsigned int x = va_arg(args, unsigned int);
+    if (format[i + 1] == '#' && x != 0) {
+        _putchar('0');      
+        _putchar('x');
+        counter += 2;
+    }
+    counter += decimalToHexadecimalx(x);
+    i += (format[i + 1] == '#') ? 3 : 2; 
+}
+else if (format[i] == '%' && (format[i + 1] == 'X' || (format[i + 1] == '#' && format[i + 2] == 'X'))) {
+    unsigned int X = va_arg(args, unsigned int);
+    if (format[i + 1] == '#' && X != 0) {
+        _putchar('0');      
+        _putchar('X');
+        counter += 2;
+    }
+    counter += decimalToHexadecimalX(X);
+    i += (format[i + 1] == '#') ? 3 : 2; 
+}
 
-			counter += decimalToOctal(o);
-			i++;
-		}
-		else if (format[i] == '%' && format[i + 1] == 'x')
-		{
-			unsigned int x = va_arg(args, unsigned int);
-			counter += decimalToHexadecimalx(x);
-			i++;
-		}
-		else if (format[i] == '%' && format[i + 1] == 'X')
-		{
-			unsigned int X = va_arg(args, unsigned int);
-			counter += decimalToHexadecimalX(X);
-			i++;
-		}
 		else if (format[i] == '%' && format[i + 1] == 'p')
 		{
 			void *p = va_arg(args, void*);
