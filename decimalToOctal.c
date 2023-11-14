@@ -16,7 +16,7 @@
         i++;
      }
  for (j = i - 1; j >= 0; j--) {
-        _putchar(octalNum[j] + '0');
+	 _putchar(octalNum[j] + '0');
          count++;
      }
  
