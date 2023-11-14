@@ -13,7 +13,7 @@ int decimalToOctal(unsigned int n);
 int decimalToHexadecimalx(unsigned int n);
 int decimalToHexadecimalX(unsigned int n);
 int charToHex(unsigned char c);
-
+ssize_t write(int fd, const void *buf, size_t count);
 int print_address(void *ptr);
 
 /*HELPER FUNCTIONS */
