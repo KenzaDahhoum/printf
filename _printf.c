@@ -36,6 +36,7 @@ int _printf(const char *format, ...)
 				case 'x': counter += print_hexadecimal(va_arg(args, unsigned int), 0); break;
 				case 'X': counter += print_hexadecimal(va_arg(args, unsigned int), 1); break;
 				case 'p': counter += print_pointer(va_arg(args, void*)); break;
+				case 'r': counter += print_reversed_string(va_arg(args, char*)); break;
 				default:  counter += _putchar('%'); counter += _putchar(format[i]); break;
 			}
 		} else {

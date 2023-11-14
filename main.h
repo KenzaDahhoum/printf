@@ -15,6 +15,7 @@ int decimalToHexadecimalX(unsigned int n);
 int charToHex(unsigned char c);
 int print_address(void *ptr);
 
+
 /*HELPER FUNCTIONS */
 int print_char(char c);
 int print_string(char *s);
@@ -25,7 +26,7 @@ int print_unsigned(unsigned int u);
 int print_octal(unsigned int o);
 int print_hexadecimal(unsigned int x, int uppercase);
 int print_pointer(void *p);
-
+int print_reversed_string(char *s);
 
 /* */
 
