@@ -1,6 +1,5 @@
 #include <stdint.h>
 #include <stddef.h>
-#include <unistd.h>
 #include "main.h"
 
 char nibbleToHexChar(uintptr_t nibble) {
@@ -15,11 +14,9 @@ int print_address(void *ptr) {
     uintptr_t address = (uintptr_t)ptr;
     const size_t numNibbles = sizeof(uintptr_t) * 2;
     int i, count = 0, leadingZero = 1;
-    char buffer[3];
 
-    buffer[0] = '0';
-    buffer[1] = 'x';
-    write(STDOUT_FILENO, buffer, 2);
+    _putchar('0');
+    _putchar('x');
     count += 2;
 
     for (i = numNibbles - 1; i >= 0; i--) {
@@ -28,7 +25,7 @@ int print_address(void *ptr) {
             continue;
         }
         leadingZero = 0;
-        write(STDOUT_FILENO, &hexChar, 1);
+        _putchar(hexChar);
         count++;
     }
     return count;
