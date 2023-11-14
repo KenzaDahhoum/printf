@@ -27,7 +27,7 @@ int print_octal(unsigned int o);
 int print_hexadecimal(unsigned int x, int uppercase);
 int print_pointer(void *p);
 int print_reversed_string(char *s);
-
+int print_rot13(char *str);
 /* */
 
 #endif /* MAIN.H*/

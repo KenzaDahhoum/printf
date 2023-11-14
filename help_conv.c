@@ -59,3 +59,28 @@ int print_reversed_string(char *s) {
     return count;
 }
 
+
+int print_rot13(char *str) {
+    int i, count = 0;
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            if (str[i] + 13 > 'z') {
+                _putchar(str[i] - 13);
+            } else {
+                _putchar(str[i] + 13);
+            }
+        } else if (str[i] >= 'A' && str[i] <= 'Z') { 
+            if (str[i] + 13 > 'Z') {
+                _putchar(str[i] - 13);
+            } else {
+                _putchar(str[i] + 13);
+            }
+        } else { 
+            _putchar(str[i]);
+        }
+        count++;
+    }
+    return count;
+}
+

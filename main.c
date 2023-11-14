@@ -14,7 +14,7 @@ int main(void)
     unsigned int ui;
     void *addr;
     char str[] = "hello";
-
+    char *test_str = "Hello, World!";
     len = _printf("Let's try to printf a simple sentence.\n");
     len2 = printf("Let's try to printf a simple sentence.\n");
     ui = (unsigned int)INT_MAX + 1024;
@@ -40,6 +40,9 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     printf("Original: %s\n", str);
+    
     _printf("Reversed: %r\n", str);
+    _printf("Original: %s\n", test_str);
+    _printf("ROT13: %R\n", test_str);
     return (0);
 }
